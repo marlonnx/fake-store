@@ -73,5 +73,5 @@ export function ProductsProvider(props: ProductsContextProps) {
   return <ProductContext.Provider value={value}>{props.children}</ProductContext.Provider>;
 }
 export function useProducts() {
-  return useContext(ProductContext);
+  return useContext(ProductContext)!;
 }

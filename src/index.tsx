@@ -14,7 +14,7 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 const config: HopeThemeConfig = {
-  initialColorMode: 'system', // 2. Add your color mode
+  initialColorMode: 'dark', // 2. Add your color mode
   // rest of the config...
 };
 

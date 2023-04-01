@@ -10,9 +10,9 @@ const ProductCard: Component<IProductCard> = (props) => {
   return (
     <>
       <div class="sm:w-full max-w-sm flex flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <A href={`/product-detail/${props.product.id}`}>
+        <A href={`/product-detail/${props.product.id}`} class='p-8'>
           <Center>
-            <img class="p-8 rounded-t-lg h-60" src={props.product.images[0]} alt="product image" />
+            <img class="rounded-lg" src={props.product.images[0]} alt="product image" />
           </Center>
         </A>
         <div class="px-5 pb-5 mt-auto">

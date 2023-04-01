@@ -13,12 +13,33 @@ import {
 } from '@hope-ui/solid';
 import { useParams } from '@solidjs/router';
 import { Component, createResource, createSignal, For, Suspense } from 'solid-js';
+import ProductDetailImage from '../../components/product_detail_image/product_detail_image';
+import ProductDetailSpecification from '../../components/product_detail_specification/ProductDetailSpecification';
 import { getProduct } from '../../services/products_service';
 
 const ProductDetailPage: Component = () => {
   const params = useParams();
   const [product] = createResource(() => parseInt(params.id), getProduct);
-  const [activeImage, setActiveImage] = createSignal<string>();
+
+  const arr = [
+    {
+      name: 'Brand',
+      description: 'absdfsdafsdaf',
+    },
+    {
+      name: 'Brand',
+      description: 'absdfsdafsdaf',
+    },
+    {
+      name: 'Brand',
+      description: 'absdfsdafsdaf',
+    },
+    {
+      name: 'Brand',
+      description: 'absdfsdafsdaf',
+    },
+  ];
+
   return (
     <>
       <div class="flex flex-col h-full px-5 lg:px-0">
@@ -40,29 +61,12 @@ const ProductDetailPage: Component = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
-          <div class="flex flex-col lg:flex-row h-full">
+          <div class="flex flex-col lg:flex-row">
             <div class="flex-1 flex flex-col mb-5 lg:mb-0 lg:mr-20 ">
-              <img
-                class="rounded-xl"
-                src={activeImage() ?? product()?.images[0]}
-              />
-
-              <div class="flex-1 ">
-                <SimpleGrid minChildWidth="120px" gap={'$10'} class="mt-5">
-                  <For each={product()?.images}>
-                    {(item, index) => (
-                      <img
-                        class="rounded-lg cursor-pointer"
-                        src={item}
-                        onClick={() => setActiveImage(item)}
-                      />
-                    )}
-                  </For>
-                </SimpleGrid>
-              </div>
+              <ProductDetailImage images={product()?.images ?? []} />
             </div>
             <div class="flex-1 ">
-              <div class="flex flex-col" style={{ height: '550px' }}>
+              <div class="flex flex-col" style={{ 'min-height': '550px' }}>
                 <p class="text-3xl font-bold">{product()?.title}</p>
                 <p class="font-bold text-gray-400 mt-5 ">{product()?.description}</p>
                 <Divider class="my-10" />
@@ -114,7 +118,7 @@ const ProductDetailPage: Component = () => {
                     <p class="underline">Enter your postal code for Delivery Availability</p>
                   </div>
                 </div>
-                <Divider class='my-2' />
+                <Divider class="my-2" />
 
                 <div class="flex-1 flex items-center ml-5">
                   <i class="fa-solid fa-clipboard mr-4"></i>
@@ -126,6 +130,18 @@ const ProductDetailPage: Component = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <h1 class="text-2xl font-bold  mt-10 md:mt-24 mb-10">
+            {product()?.title} Full Specifications
+          </h1>
+
+          <div class="flex flex-col md:flex-row">
+            <div class="flex-1 mb-5  lg:mb-0 lg:mr-20">
+              <ProductDetailSpecification title="General" tableContent={arr} />
+            </div>
+            <div class="flex-1">
+              <ProductDetailSpecification title="Product Detail" tableContent={arr} />
             </div>
           </div>
         </Suspense>
