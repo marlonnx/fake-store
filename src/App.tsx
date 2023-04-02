@@ -8,29 +8,32 @@ import Header from './shared/components/header/Header';
 import { ProductsProvider } from './modules/home/contexts/product_context';
 import HomeModule from './modules/home/Home.module';
 import ProductDetailPage from './modules/home/pages/product-detail/ProductDetailPage';
+import { CartProvider } from './shared/contexts/cart_context';
 
 const App: Component = () => {
   const location = useLocation();
 
   return (
-    <>
+    <div class="mx-5">
       <AuthProvider>
-        <Show when={!location.pathname.includes('/access')}>
-          <Header />
-        </Show>
-        <Routes>
-          <Route path="/">
-            <Route path="/" component={HomeModule} />
-            <Route path="/product-detail/:id" component={ProductDetailPage} />
-          </Route>
-          <Route path="/access">
-            <Route path="/" component={Access} />
-            <Route path="/login" component={Login} />
-            <Route path="/create-account" component={Access} />
-          </Route>
-        </Routes>
+        <CartProvider>
+          <Show when={!location.pathname.includes('/access')}>
+            <Header />
+          </Show>
+          <Routes>
+            <Route path="/">
+              <Route path="/" component={HomeModule} />
+              <Route path="/product-detail/:id" component={ProductDetailPage} />
+            </Route>
+            <Route path="/access">
+              <Route path="/" component={Access} />
+              <Route path="/login" component={Login} />
+              <Route path="/create-account" component={Access} />
+            </Route>
+          </Routes>
+        </CartProvider>
       </AuthProvider>
-    </>
+    </div>
   );
 };
 

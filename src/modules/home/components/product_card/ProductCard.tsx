@@ -1,16 +1,18 @@
-import { Center } from '@hope-ui/solid';
+import { Button, Center } from '@hope-ui/solid';
 import { A, useNavigate } from '@solidjs/router';
 import { Accessor, Component } from 'solid-js';
 import { Product } from '../../../../shared/models/product';
+import { userCart } from '../../../../shared/contexts/cart_context';
 interface IProductCard {
   product: Product;
 }
 
 const ProductCard: Component<IProductCard> = (props) => {
+  const cart = userCart();
   return (
     <>
       <div class="sm:w-full max-w-sm flex flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <A href={`/product-detail/${props.product.id}`} class='p-8'>
+        <A href={`/product-detail/${props.product.id}`} class="p-3">
           <Center>
             <img class="rounded-lg" src={props.product.images[0]} alt="product image" />
           </Center>
@@ -26,12 +28,9 @@ const ProductCard: Component<IProductCard> = (props) => {
             <span class="text-3xl font-bold text-gray-900 dark:text-white">
               ${props.product.price}
             </span>
-            <a
-              href="#"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
+            <Button size="sm" onClick={() => cart.add({ product: props.product, quantity: 0 })}>
               Add to cart
-            </a>
+            </Button>
           </div>
         </div>
       </div>

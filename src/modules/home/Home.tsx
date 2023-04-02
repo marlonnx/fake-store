@@ -19,7 +19,7 @@ const HomePage: Component = (props) => {
       <img src={Banner} class="rounded-b-lg" />
       <VStack gap="$10" class="mb-10">
         <Center>
-          <SimpleGrid columns={{ '@initial': 1, '@md': 3, '@lg': 5 }} gap="$5" class="my-5">
+          <SimpleGrid columns={{ '@initial': 1, '@md': 3, '@lg':  6}} gap="$5" class="my-5">
             <For each={context?.products()}>
               {(item, index) => {
                 return <ProductCard product={item} />;

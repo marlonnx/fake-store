@@ -1,7 +1,8 @@
-import { Button } from '@hope-ui/solid';
+import { Button, HStack, IconButton, Stack, Tag } from '@hope-ui/solid';
 import { A, useNavigate } from '@solidjs/router';
 import { Component, Show } from 'solid-js';
 import { useAuth } from '../../auth/auth_context';
+import CartButton from '../cart-button/CartButton';
 
 const Header: Component = (props) => {
   const navigate = useNavigate();
@@ -43,14 +44,16 @@ const Header: Component = (props) => {
             </li>
           </ul>
         </div>
-        <div class="order-2 md:order-3">
+        <HStack spacing="$5" class="order-2 md:order-3">
+          <CartButton />
+
           <Show
             when={auth?.user()}
             fallback={<Button onclick={() => navigate('/access')}>Login</Button>}
           >
             <Button onclick={() => auth?.logout()}>Sair</Button>
           </Show>
-        </div>
+        </HStack>
       </div>
     </nav>
   );

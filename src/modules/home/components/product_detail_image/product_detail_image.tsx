@@ -11,10 +11,10 @@ const ProductDetailImage: Component<IProductDetailImage> = (props) => {
 
   return (
     <>
-      <img class="rounded-xl md:active-image"  src={activeImage() ?? props.images[0]} />
+      <img class="rounded-xl min-h-0 md:min-h-[550px]"  src={activeImage() ?? props.images[0]} />
       
       <div class="flex-1 ">
-        <SimpleGrid minChildWidth="120px" gap={'$10'} class="mt-5">
+        <SimpleGrid minChildWidth="60px" gap={'$10'} class="mt-5">
           <For each={props.images}>
             {(item, index) => (
               <img
